@@ -14,9 +14,9 @@ module.exports = function (app) {
 
     // API POST requests
     app.post("/api/friends", function (req, res) {
-        console.log(req.body.scores);
 
         var user = req.body;
+        console.log(user);
 
         for (i = 0; i < user.scores.length; i++) {
             user.scores[i] = parseInt(user.scores[i]);
