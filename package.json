@@ -1,5 +1,5 @@
 {
-    "name": "Friend Finder",
+    "name": "Friend-Finder",
     "version": "1.0.0",
     "description": "A simple friend-matching application based on user surveys.",
     "main": "server.js",
