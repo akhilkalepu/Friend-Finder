@@ -14,6 +14,7 @@ module.exports = function (app) {
 
     // API POST requests
     app.post("/api/friends", function (req, res) {
+        console.log(req.body.scores);
 
         // Create variables for user's answers and app's calculations
         var newFriendScores = req.body.scores;

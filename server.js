@@ -12,7 +12,7 @@ var app = express();
 var PORT = process.env.PORT || 8080;
 
 // For serving of static CSS
-app.use(express.static(__dirname + "/public/style.css"));
+app.use(express.static(__dirname + "/app/css"));
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
