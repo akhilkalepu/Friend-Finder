@@ -23,12 +23,12 @@
 
         <div class="form-group">
             <label for="surveyName">Name (Required)</label>
-            <input type="text" class="form-control" id="surveyName" aria-describedby="nameHelp" placeholder="We'll never share your information with anyone else. 😉">
+            <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" placeholder="We'll never share your information with anyone else. 😉">
         </div>
 
         <div class="form-group">
-            <label for="surveyName">Link to Photo Image (Required)</label>
-            <input type="text" class="form-control" id="surveyName" aria-describedby="nameHelp">
+            <label for="surveyPhoto">Link to Photo Image (Required)</label>
+            <input type="text" class="form-control" id="inputPhoto" aria-describedby="nameHelp">
         </div>
 
         <hr class="my-4">
@@ -173,7 +173,25 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-secondary btn-lg btn-block">Submit</button>
+        <button type="button" id="submitBtn" class="btn btn-secondary btn-lg btn-block">Submit</button>
+
+		<div id="bestFriendModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Your New Best Friend</h1>
+					</div>
+					<div class="modal-body">
+						<h2 id="bestFriend"></h2>
+						<img id="bestFriendPhoto" src="#">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+        </div>
 
     </form>
 
@@ -188,3 +206,47 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+    $("#submitBtn").on("click", function (event) {
+        event.preventDefault();
+        // Form validation
+        var valid = true;
+        if ($("#inputName").val() === "" || $("#inputPhoto").val() === "") {
+            valid = false;
+        } else if ($("#answer1").val() === "empty" || $("#answer2").val() === "empty" || $("#answer3").val() ===
+            "empty" || $("#answer4").val() === "empty" || $("#answer5").val() === "empty" || $("#answer6")
+            .val() === "empty" || $("#answer7").val() === "empty" || $("#answer8").val() === "empty" || $(
+                "#answer9").val() === "empty" || $("#answer10").val() === "empty") {
+            valid = false;
+        }
+        if (valid === true) {
+            var newUser = {
+                name: $("#inputName").val().trim(),
+                photo: $("#inputPhoto").val().trim(),
+                scores: [
+                    $("#answer1").val(),
+                    $("#answer2").val(),
+                    $("#answer3").val(),
+                    $("#answer4").val(),
+                    $("#answer5").val(),
+                    $("#answer6").val(),
+                    $("#answer7").val(),
+                    $("#answer8").val(),
+                    $("#answer9").val(),
+                    $("#answer10").val()
+                ]
+            };
+            var currentURL = window.location.origin;
+            // Ajax call for receiving response after POST req
+            $.post(currentURL + "/api/friends", newUser, function (data) {
+                $("#bestFriend").text(data.name);
+                $("#bestFriendPhoto").attr("src", data.photo);
+                $("#bestFriendModal").modal("toggle");
+            });
+        } else {
+            // If a required field is missing, show alert
+            alert("Survey is incomplete!");
+        }
+    });
+</script>
