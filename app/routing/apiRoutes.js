@@ -28,7 +28,7 @@ module.exports = function (app) {
 
             for (j = 0; j < newFriendScores.length; j++) {
                 // Subtract friends' answers against user's respective answer, create absolute value of total difference for each friend
-                totalDifference += (Math.abs(parseInt(friendList[i].scores[j]) - parseInt(newFriendScores[j])));
+                totalDifference += (Math.abs(parseInt(friends[i].scores[j]) - parseInt(newFriendScores[j])));
                 // Push each total to the scores array
                 scoresArray.push(totalDifference);
             }
