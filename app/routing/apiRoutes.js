@@ -1,6 +1,6 @@
 // Load Data
 // =============================================================
-var friends = require("../data/friends.js");
+var friends = require("../data/friends");
 
 
 // Routes
@@ -16,30 +16,28 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
         console.log(req.body.scores);
 
-        // Create variables for user's answers and app's calculations
-        var newFriendScores = req.body.scores;
-        var scoresArray = [];
-        var friendCount = 0;
-        var bestMatch = 0;
+        var user = req.body;
 
-        // For loop through the friends array from friends.js
+        for (i = 0; i < user.scores.length; i++) {
+            user.scores[i] = parseInt(user.scores[i]);
+        }
+
+        var bestFriendIndex = 0;
+        var minimumDifference = 100;
+
         for (i = 0; i < friends.length; i++) {
             var totalDifference = 0;
+            
+            for (j = 0; j < friends[i].scores.length; j++) {
+                totalDifference += Math.abs(user.scores[j] - friends[i].scores[j]);
+            }
 
-            for (j = 0; j < newFriendScores.length; j++) {
-                // Subtract friends' answers against user's respective answer, create absolute value of total difference for each friend
-                totalDifference += (Math.abs(parseInt(friends[i].scores[j]) - parseInt(newFriendScores[j])));
-                // Push each total to the scores array
-                scoresArray.push(totalDifference);
+            if (totalDifference < minimumDifference) {
+                bestFriendIndex = i;
+                minimumDifference = totalDifference;
             }
         }
 
-        // Friend with the score closest to 0 is your best friend
-        for (i = 0; i <scoresArray.length; i++) {
-            if (scoresArray[i] <= scoresArray[bestFriend]) {
-                bestFriend = i;
-            }
-        }
         res.json(friends[bestFriend]);
 
         // Add user to friends array
