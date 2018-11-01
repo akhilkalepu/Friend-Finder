@@ -214,10 +214,17 @@
         var valid = true;
         if ($("#inputName").val() === "" || $("#inputPhoto").val() === "") {
             valid = false;
-        } else if ($("#answer1").val() === "empty" || $("#answer2").val() === "empty" || $("#answer3").val() ===
-            "empty" || $("#answer4").val() === "empty" || $("#answer5").val() === "empty" || $("#answer6")
-            .val() === "empty" || $("#answer7").val() === "empty" || $("#answer8").val() === "empty" || $(
-                "#answer9").val() === "empty" || $("#answer10").val() === "empty") {
+        } else if (
+            $("#answer1").val() === "empty" ||
+            $("#answer2").val() === "empty" ||
+            $("#answer3").val() === "empty" ||
+            $("#answer4").val() === "empty" ||
+            $("#answer5").val() === "empty" ||
+            $("#answer6").val() === "empty" ||
+            $("#answer7").val() === "empty" ||
+            $("#answer8").val() === "empty" ||
+            $("#answer9").val() === "empty" || 
+            $("#answer10").val() === "empty") {
             valid = false;
         }
         if (valid === true) {
