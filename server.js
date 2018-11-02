@@ -1,9 +1,7 @@
 // Dependencies
 // =============================================================
 var express = require("express");
-var path = require("path");
 var bodyParser = require('body-parser');
-
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -20,8 +18,8 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Router
 // =============================================================
-require("./app/routing/apiRoutes.js")(app);
-require("./app/routing/htmlRoutes.js")(app);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 
 // Listener
